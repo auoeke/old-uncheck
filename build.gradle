@@ -1,0 +1,38 @@
+plugins {
+    id("java-library")
+    id("maven-publish")
+}
+
+group("user11681")
+version("0.0.0")
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:latest.release")
+}
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+
+    repositories {
+        maven {
+            url("https://auoeke.jfrog.io/artifactory/maven")
+
+            credentials {
+                username(System.env.ARTIFACTORY_USER)
+                password(System.env.ARTIFACTORY_PASSWORD)
+            }
+        }
+    }
+}

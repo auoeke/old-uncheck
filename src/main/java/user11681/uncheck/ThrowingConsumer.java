@@ -1,4 +1,4 @@
-package user11681.dcp.common.uncheck;
+package user11681.uncheck;
 
 import java.util.function.Consumer;
 
@@ -7,6 +7,6 @@ public interface ThrowingConsumer<T> extends Consumer<T> {
 
     @Override
     default void accept(T argument) {
-        Unchecker.handle(argument, this);
+        Uncheck.handle(argument, this);
     }
 }

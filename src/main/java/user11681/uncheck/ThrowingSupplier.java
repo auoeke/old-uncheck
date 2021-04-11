@@ -1,4 +1,4 @@
-package user11681.dcp.common.uncheck;
+package user11681.uncheck;
 
 import java.util.function.Supplier;
 
@@ -7,6 +7,6 @@ public interface ThrowingSupplier<T> extends Supplier<T> {
 
     @Override
     default T get() {
-        return Unchecker.handle(this);
+        return Uncheck.handle(this);
     }
 }
