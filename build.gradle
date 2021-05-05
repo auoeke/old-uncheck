@@ -4,7 +4,12 @@ plugins {
 }
 
 group("user11681")
-version("0.1.0")
+version("0.2.0")
+
+tasks[sourceSets.main.compileJavaTaskName].configure {
+    sourceCompatibility = 9
+    targetCompatibility = 9
+}
 
 repositories {
     mavenCentral()
@@ -27,11 +32,11 @@ publishing {
 
     repositories {
         maven {
-            url("https://auoeke.jfrog.io/artifactory/maven")
+            url = System.properties["maven.repository"]
 
             credentials {
-                username = System.properties."maven.username"
-                password = System.properties."maven.password"
+                username = System.properties["maven.username"]
+                password = System.properties["maven.password"]
             }
         }
     }

@@ -50,6 +50,14 @@ public class Uncheck {
         }
     }
 
+    public static <T> T handle(ThrowingSupplier<T> supplier, Object fallback) {
+        try {
+            return supplier.execute();
+        } catch (Throwable throwable) {
+            return (T) fallback;
+        }
+    }
+
     public static <T> void handle(T argument, ThrowingConsumer<T> consumer, ThrowingConsumer<T> handler) {
         try {
             consumer.execute(argument);
@@ -79,6 +87,62 @@ public class Uncheck {
             return function.execute(object);
         } catch (Throwable throwable) {
             return handler.get();
+        }
+    }
+
+    public static <T, R> R handle(T object, ThrowingFunction<T, R> function, Object fallback) {
+        try {
+            return function.execute(object);
+        } catch (Throwable throwable) {
+            return (R) fallback;
+        }
+    }
+
+    public static <T extends AutoCloseable> void handle(T closeable, ThrowingConsumer<T> consumer) {
+        try (closeable) {
+            consumer.execute(closeable);
+        } catch (Throwable throwable) {
+            throw rethrow(throwable);
+        }
+    }
+
+    public static <T extends AutoCloseable> void handle(T closeable, ThrowingConsumer<T> consumer, ThrowingRunnable handler) {
+        try (closeable) {
+            consumer.execute(closeable);
+        } catch (Throwable throwable) {
+            handler.run();
+        }
+    }
+
+    public static <T extends AutoCloseable> void handle(T closeable, ThrowingConsumer<T> consumer, ThrowingConsumer<T> handler) {
+        try (closeable) {
+            consumer.execute(closeable);
+        } catch (Throwable throwable) {
+            handler.accept(closeable);
+        }
+    }
+
+    public static <T extends AutoCloseable, R> R handle(T closeable, ThrowingFunction<T, R> consumer, ThrowingFunction<T, R> handler) {
+        try (closeable) {
+            return consumer.execute(closeable);
+        } catch (Throwable throwable) {
+            return handler.apply(closeable);
+        }
+    }
+
+    public static <T extends AutoCloseable, R> R handle(T closeable, ThrowingFunction<T, R> consumer, ThrowingSupplier<R> handler) {
+        try (closeable) {
+            return consumer.execute(closeable);
+        } catch (Throwable throwable) {
+            return handler.get();
+        }
+    }
+
+    public static <T extends AutoCloseable, R> R handle(T closeable, ThrowingFunction<T, R> consumer, Object fallback) {
+        try (closeable) {
+            return consumer.execute(closeable);
+        } catch (Throwable throwable) {
+            return (R) fallback;
         }
     }
 
