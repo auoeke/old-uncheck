@@ -3,8 +3,8 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
-import user11681.uncheck.ThrowingRunnable;
-import user11681.uncheck.Uncheck;
+import net.auoeke.uncheck.ThrowingRunnable;
+import net.auoeke.uncheck.Uncheck;
 
 @SuppressWarnings("ALL")
 @Testable

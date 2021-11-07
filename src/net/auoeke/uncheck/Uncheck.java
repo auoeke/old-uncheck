@@ -1,4 +1,4 @@
-package user11681.uncheck;
+package net.auoeke.uncheck;
 
 @SuppressWarnings("unchecked")
 public class Uncheck {

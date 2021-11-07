@@ -1,4 +1,4 @@
-package user11681.uncheck;
+package net.auoeke.uncheck;
 
 import java.util.function.Function;
 

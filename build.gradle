@@ -3,12 +3,20 @@ plugins {
     id("maven-publish")
 }
 
-group("user11681")
+group("net.auoeke")
 version("0.2.0")
 
-compileJava {
-    sourceCompatibility = 9
-    targetCompatibility = 9
+sourceCompatibility = 16
+targetCompatibility = 16
+
+sourceSets {
+    main {
+        java.srcDir("src")
+    }
+
+    test {
+        java.srcDir("test")
+    }
 }
 
 repositories {
@@ -16,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:+")
+    testImplementation("org.junit.jupiter:junit-jupiter:latest.integration")
 }
 
 java {
@@ -32,7 +40,7 @@ publishing {
 
     repositories {
         maven {
-            url = "https://auoeke.jfrog.io/artifactory/maven"
+            url = "https://maven.auoeke.net"
 
             credentials {
                 username = System.properties["maven.username"]

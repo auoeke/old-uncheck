@@ -1,4 +1,4 @@
-package user11681.uncheck;
+package net.auoeke.uncheck;
 
 public interface ThrowingRunnable extends Runnable {
     void execute() throws Throwable;
